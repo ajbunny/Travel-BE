@@ -23,6 +23,16 @@ mongoose.connection.once("open", () => {
 });
 //#endregion
 
+//MIDDLEWARE
+app.use(express.urlencoded({ extended: false })); // extended: false - does not allow nested objects in query strings
+app.use(express.json()); //use .json(), not .urlencoded()
+app.use(express.static("public")); // we need to tell express to use the public directory for static files... this way our app will find index.html as the route of the application! We can then attach React to that file!
+app.use(cors());
+
+// // Environmental Varibles
+// const app = express();
+// const mongoURI = process.env.MONGO_URI
+// const PORT = process.env.PORT || 3001
   
 //TO MAKE SURE THE NODEMON IS RUNNING
 app.use((req, res, next) => {
